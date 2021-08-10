@@ -50,13 +50,13 @@ export default {
         },
         body: JSON.stringify(postData),
       });
+      const data = await res.json();
       if (res.ok) {
-        const data = await res.json();
         localStorage.setItem("aot_token", data.token);
         this.$emit("logged-in", data.user);
         return;
       }
-      console.log("login failed");
+      this.$emit("snackbar-set", { message: data.message, status: "error" });
     },
   },
 };
@@ -92,6 +92,10 @@ $secondary: #e49631;
     border-radius: 10rem;
     border: none;
     outline: none;
+    cursor: pointer;
+    &:hover {
+      opacity: 0.8;
+    }
   }
 }
 </style>

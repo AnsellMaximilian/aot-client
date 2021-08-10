@@ -2,16 +2,28 @@
   <div id="nav">
     <Header :user="user" />
   </div>
-  <router-view @logged-in="setUser" :characters="characters" />
+  <router-view
+    @logged-in="setUser"
+    @snackbar-set="setSnackbar"
+    :characters="characters"
+  />
+  <Snackbar
+    v-if="snackbarMessage"
+    @snackbar-set="setSnackbar"
+    :message="snackbarMessage.message"
+    :status="snackbarMessage.status"
+  />
 </template>
 
 <script>
 import Header from "@/components/Header.vue";
+import Snackbar from "@/components/Snackbar.vue";
 
 export default {
   name: "App",
   components: {
     Header,
+    Snackbar,
   },
   created() {},
 
@@ -19,11 +31,15 @@ export default {
     setUser(user) {
       this.user = user;
     },
+    setSnackbar(snackbarMessage) {
+      this.snackbarMessage = snackbarMessage;
+    },
   },
   data() {
     return {
       characters: [],
       user: null,
+      snackbarMessage: null,
     };
   },
 };
