@@ -1,5 +1,5 @@
 <template>
-  <div class="list">
+  <div class="list" v-if="characters.length > 0">
     <div class="card" v-for="character in characters" :key="character.id">
       <div class="card-header">
         {{ character.name }}
@@ -17,6 +17,7 @@
       </div>
     </div>
   </div>
+  <i v-else class="fas fa-smile-beam spinner"></i>
 </template>
 
 <script>
@@ -79,5 +80,10 @@ $secondary: #e49631;
       }
     }
   }
+}
+.spinner {
+  font-size: 3rem;
+  margin-top: 3rem;
+  animation: spin 1s linear infinite;
 }
 </style>
