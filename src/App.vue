@@ -1,29 +1,67 @@
 <template>
   <div id="nav">
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
+    <Header :user="user" />
   </div>
-  <router-view />
+  <router-view @logged-in="setUser" :characters="characters" />
 </template>
 
+<script>
+import Header from "@/components/Header.vue";
+
+export default {
+  name: "App",
+  components: {
+    Header,
+  },
+  created() {},
+
+  methods: {
+    setUser(user) {
+      this.user = user;
+    },
+  },
+  data() {
+    return {
+      characters: [],
+      user: null,
+    };
+  },
+};
+</script>
+
 <style lang="scss">
+* {
+  box-sizing: border-box;
+}
+body,
+html {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+ul {
+  padding: 0;
+  margin: 0;
+  list-style-type: none;
+}
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
+  min-height: 100%;
+  background-color: #161111;
+  color: white;
 }
 
 #nav {
-  padding: 30px;
-
   a {
     font-weight: bold;
-    color: #2c3e50;
+    color: white;
+    text-decoration: none;
 
     &.router-link-exact-active {
-      color: #42b983;
+      color: #e49631;
     }
   }
 }
