@@ -17,12 +17,16 @@
       </div>
     </div>
   </div>
-  <i v-else class="fas fa-smile-beam spinner"></i>
+  <Spinner v-else iconClass="fas fa-smile-beam" />
 </template>
 
 <script>
+import Spinner from "@/components/Spinner.vue";
 export default {
   name: "Header",
+  components: {
+    Spinner,
+  },
   async created() {
     const res = await fetch("http://localhost:8000/api/characters");
     const data = await res.json();
@@ -80,10 +84,5 @@ $secondary: #e49631;
       }
     }
   }
-}
-.spinner {
-  font-size: 3rem;
-  margin-top: 3rem;
-  animation: spin 1s linear infinite;
 }
 </style>
