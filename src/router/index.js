@@ -2,6 +2,7 @@ import { createRouter, createWebHashHistory } from "vue-router";
 import Home from "../views/Home.vue";
 
 import CharacterIndex from "../views/characters/CharacterIndex.vue";
+import CharacterShow from "../views/characters/CharacterShow.vue";
 import Login from "../views/auth/Login.vue";
 
 const routes = [
@@ -14,6 +15,11 @@ const routes = [
     path: "/characters",
     name: "CharacterIndex",
     component: CharacterIndex,
+  },
+  {
+    path: "/characters/:id",
+    name: "CharacterShow",
+    component: CharacterShow,
   },
   {
     path: "/login",
