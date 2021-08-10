@@ -38,6 +38,10 @@ $secondary: #e49631;
     background-color: rgb(255, 161, 161);
     color: rgb(124, 0, 0);
   }
+  &.success {
+    background-color: rgb(91, 228, 57);
+    color: rgb(21, 90, 36);
+  }
   .close-btn {
     font-size: 1.25rem;
     margin-left: 1rem;

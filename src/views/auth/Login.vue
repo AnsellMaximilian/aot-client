@@ -54,6 +54,13 @@ export default {
       if (res.ok) {
         localStorage.setItem("aot_token", data.token);
         this.$emit("logged-in", data.user);
+        this.$emit("snackbar-set", {
+          message: `Successfully logged in as a${
+            data.user.isAdmin ? "n Admin." : " Guest"
+          }`,
+          status: "success",
+        });
+
         return;
       }
       this.$emit("snackbar-set", { message: data.message, status: "error" });
