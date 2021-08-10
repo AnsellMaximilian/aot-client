@@ -2,7 +2,9 @@
   <div class="list" v-if="characters.length > 0">
     <div class="card" v-for="character in characters" :key="character.id">
       <div class="card-header">
-        {{ character.name }}
+        <router-link :to="`/characters/${character.id}`">
+          {{ character.name }}</router-link
+        >
       </div>
       <div class="card-body">
         <img :src="character.picture_url" alt="" />
@@ -61,6 +63,13 @@ $secondary: #e49631;
     padding: 1rem;
     // color: $primary;
     font-weight: bold;
+    a {
+      text-decoration: none;
+      color: inherit;
+      &:hover {
+        text-decoration: underline;
+      }
+    }
   }
   .card-body {
     flex-grow: 1;

@@ -76,7 +76,8 @@ ul {
     color: white;
     text-decoration: none;
 
-    &.router-link-exact-active {
+    &.router-link-exact-active,
+    &.router-link-active {
       color: #e49631;
     }
   }

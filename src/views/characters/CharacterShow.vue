@@ -2,18 +2,28 @@
   <div v-if="character" class="container">
     {{ character.name }}
   </div>
+  <Spinner v-else iconClass="fas fa-smile-beam" />
 </template>
 
 <script>
+import Spinner from "@/components/Spinner.vue";
+
 export default {
   name: "CharacterShow",
+  components: {
+    Spinner,
+  },
   async created() {
     const res = await fetch(
       `http://localhost:8000/api/characters/${this.$route.params.id}`
     );
     const data = await res.json();
+    if (res.ok) {
+      console.log(data);
+      this.character = data;
+      return;
+    }
     console.log(data);
-    this.character = data;
   },
   data() {
     return {

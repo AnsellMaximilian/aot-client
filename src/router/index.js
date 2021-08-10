@@ -1,6 +1,8 @@
 import { createRouter, createWebHashHistory } from "vue-router";
 import Home from "../views/Home.vue";
-
+//Characters
+import CharacterView from "../views/characters/CharacterView.vue";
+import CharacterCreate from "../views/characters/CharacterCreate.vue";
 import CharacterIndex from "../views/characters/CharacterIndex.vue";
 import CharacterShow from "../views/characters/CharacterShow.vue";
 import Login from "../views/auth/Login.vue";
@@ -13,13 +15,25 @@ const routes = [
   },
   {
     path: "/characters",
-    name: "CharacterIndex",
-    component: CharacterIndex,
-  },
-  {
-    path: "/characters/:id",
-    name: "CharacterShow",
-    component: CharacterShow,
+    name: "CharacterView",
+    component: CharacterView,
+    children: [
+      {
+        path: "create",
+        name: "CharacterCreate",
+        component: CharacterCreate,
+      },
+      {
+        path: "",
+        name: "CharacterIndex",
+        component: CharacterIndex,
+      },
+      {
+        path: ":id",
+        name: "CharacterShow",
+        component: CharacterShow,
+      },
+    ],
   },
   {
     path: "/login",
