@@ -30,6 +30,7 @@
 </template>
 
 <script>
+import router from "../../router/index";
 export default {
   name: "Login",
   data() {
@@ -60,7 +61,7 @@ export default {
           }`,
           status: "success",
         });
-
+        router.push("/");
         return;
       }
       this.$emit("snackbar-set", { message: data.message, status: "error" });
