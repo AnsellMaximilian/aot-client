@@ -25,7 +25,7 @@ $primary: #2a1d1d;
 $secondary: #e49631;
 
 .snackbar {
-  position: absolute;
+  position: fixed;
   bottom: 0;
   right: 0;
   margin: 1rem;
