@@ -16,21 +16,28 @@
             <span>Gender:</span> <span>{{ character.gender }}</span>
           </div>
         </div>
+        <div class="controls">
+          <button class="warning">Edit</button>
+          <button class="danger">Delete</button>
+        </div>
       </div>
     </div>
   </div>
   <Spinner v-else :image="true" />
+  <FloatingActionButton iconClass="fas fa-plus" />
 </template>
 
 <script>
 import Spinner from "@/components/Spinner.vue";
+import FloatingActionButton from "@/components/FloatingActionButton.vue";
 export default {
   name: "Header",
   components: {
     Spinner,
+    FloatingActionButton,
   },
   async created() {
-    const res = await fetch("http://localhost:8000/api/characters");
+    const res = await fetch("/characters");
     const data = await res.json();
     this.characters = data;
   },
@@ -90,6 +97,26 @@ $secondary: #e49631;
       & > div {
         display: grid;
         grid-template-columns: 1fr 1fr;
+      }
+    }
+    .controls {
+      background-color: $secondary;
+      padding: 1rem;
+      display: flex;
+      justify-content: flex-end;
+      button {
+        padding: 0.5rem 1rem;
+        color: white;
+        font-weight: bold;
+        border-radius: 10rem;
+        border: none;
+        margin-left: 1rem;
+        &.danger {
+          background-color: rgb(211, 0, 0);
+        }
+        &.warning {
+          background-color: rgb(255, 208, 0);
+        }
       }
     }
   }

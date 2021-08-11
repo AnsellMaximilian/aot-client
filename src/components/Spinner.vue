@@ -21,6 +21,7 @@ $secondary: #e49631;
 
 .spinner {
   font-size: 3rem;
+  display: inline-block;
   margin: 3rem auto;
   animation: spin 1s linear infinite;
   img {
