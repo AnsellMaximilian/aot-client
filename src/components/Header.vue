@@ -21,7 +21,7 @@
               <ul>
                 <li>My Account</li>
                 <hr />
-                <li>Logout</li>
+                <li @click="logOut">Logout</li>
               </ul>
             </div>
           </li>
@@ -46,6 +46,10 @@ export default {
     toggleAccountDropdown(e) {
       e.stopPropagation();
       this.accountDropdownOpen = !this.accountDropdownOpen;
+    },
+    logOut(e) {
+      e.stopPropagation();
+      this.$emit("logged-out");
     },
   },
 };
@@ -87,7 +91,6 @@ header {
           transform: translate(-50%, 100%);
           border-radius: 0.5rem;
           .close-btn {
-            z-index: 100;
             margin-left: auto;
             font-size: 1.5rem;
             width: 2rem;

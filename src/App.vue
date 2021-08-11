@@ -1,6 +1,6 @@
 <template>
   <div id="nav">
-    <Header :user="user" />
+    <Header :user="user" @logged-out="logOut" />
   </div>
   <router-view
     @logged-in="setUser"
@@ -26,29 +26,33 @@ export default {
     Snackbar,
   },
   async created() {
-    const res = await fetch(
-      "http://localhost:8000/api/tokens/get-user-from-token",
-      {
-        headers: {
-          Accept: "application/json",
-          Authorization: `Bearer ${localStorage.getItem("aot_token")}`,
-        },
-      }
-    );
+    const authToken = localStorage.getItem("aot_token");
+    // If there's an auth token in local storage, attempt to log in user.
+    if (authToken) {
+      const res = await fetch(
+        "http://localhost:8000/api/tokens/get-user-from-token",
+        {
+          headers: {
+            Accept: "application/json",
+            Authorization: `Bearer ${authToken}`,
+          },
+        }
+      );
 
-    const data = await res.json();
-    if (res.ok) {
-      this.user = data;
+      const data = await res.json();
+      if (res.ok) {
+        this.user = data;
+        this.setSnackbar({
+          message: `Logged in as ${data.name}`,
+          status: "success",
+        });
+        return;
+      }
       this.setSnackbar({
-        message: `Logged in as ${data.name}`,
-        status: "success",
+        message: "A login attempt has failed. Try logging in a from the form.",
+        status: "error",
       });
-      return;
     }
-    this.setSnackbar({
-      message: "A login attempt has failed. Try logging in a from the form.",
-      status: "error",
-    });
   },
 
   methods: {
@@ -57,6 +61,14 @@ export default {
     },
     setSnackbar(snackbarMessage) {
       this.snackbarMessage = snackbarMessage;
+    },
+    logOut() {
+      this.user = null;
+      localStorage.removeItem("aot_token");
+      this.setSnackbar({
+        message: "Sucessfully logged out.",
+        status: "success",
+      });
     },
   },
   data() {
