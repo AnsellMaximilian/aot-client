@@ -6,8 +6,8 @@
       <div class="nav">
         <ul>
           <li><router-link to="/characters">Characters</router-link></li>
-          <li><router-link to="/titans">Titans</router-link></li>
-          <li><router-link to="/locations">Locations</router-link></li>
+          <!-- <li><router-link to="/titans">Titans</router-link></li>
+          <li><router-link to="/locations">Locations</router-link></li> -->
         </ul>
         <ul class="auth-links">
           <!-- <li><router-link to="/">Sign Up</router-link></li> -->

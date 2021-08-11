@@ -25,7 +25,31 @@ export default {
     Header,
     Snackbar,
   },
-  created() {},
+  async created() {
+    const res = await fetch(
+      "http://localhost:8000/api/tokens/get-user-from-token",
+      {
+        headers: {
+          Accept: "application/json",
+          Authorization: `Bearer ${localStorage.getItem("aot_token")}`,
+        },
+      }
+    );
+
+    const data = await res.json();
+    if (res.ok) {
+      this.user = data;
+      this.setSnackbar({
+        message: `Logged in as ${data.name}`,
+        status: "success",
+      });
+      return;
+    }
+    this.setSnackbar({
+      message: "A login attempt has failed. Try logging in a from the form.",
+      status: "error",
+    });
+  },
 
   methods: {
     setUser(user) {
