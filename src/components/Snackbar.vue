@@ -1,5 +1,5 @@
 <template>
-  <div :class="['snackbar', status]">
+  <div v-if="message && status" :class="['snackbar', status]">
     <span>{{ message }}</span>
     <span class="close-btn" @click="closeSnackbar">&times;</span>
   </div>
@@ -17,6 +17,7 @@ export default {
       this.$emit("snackbar-set", null);
     },
   },
+  emits: ["snackbarSet"],
 };
 </script>
 

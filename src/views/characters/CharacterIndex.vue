@@ -36,6 +36,8 @@ export default {
     Spinner,
     FloatingActionButton,
   },
+  emits: ["snackbar-set"],
+
   async created() {
     const res = await fetch("/characters");
     const data = await res.json();

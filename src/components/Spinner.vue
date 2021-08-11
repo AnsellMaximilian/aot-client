@@ -10,7 +10,7 @@ export default {
   name: "Spinner",
   props: {
     iconClass: String,
-    image: String,
+    image: Boolean,
   },
 };
 </script>

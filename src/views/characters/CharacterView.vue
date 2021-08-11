@@ -8,6 +8,7 @@
 <script>
 export default {
   name: "CharacterView",
+  emits: ["snackbar-set"],
   methods: {
     onSnackbarSet(snackbarMessage) {
       this.$emit("snackbar-set", snackbarMessage);

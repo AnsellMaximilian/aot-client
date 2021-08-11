@@ -1,6 +1,5 @@
 <template>
   <header>
-    <!-- <h1>Attack on Titan</h1> -->
     <div class="navbar">
       <div class="brand"><router-link to="/">Attack On Titan</router-link></div>
       <div class="nav">
