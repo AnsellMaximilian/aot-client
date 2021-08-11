@@ -27,7 +27,9 @@
         </div>
         <div class="controls" v-if="!!user && user.isAdmin">
           <button class="warning">Edit</button>
-          <button class="danger">Delete</button>
+          <button class="danger" @click="deleteCharacter(character.id)">
+            Delete
+          </button>
         </div>
       </div>
     </div>
@@ -43,11 +45,41 @@ export default {
     Spinner,
   },
   emits: ["snackbar-set"],
+  methods: {
+    async deleteCharacter(id) {
+      const res = await fetch(`/characters/${id}`, {
+        method: "DELETE",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem("aot_token")}`,
+        },
+      });
+      const data = await res.json();
+      if (res.ok) {
+        this.characters = [];
+        this.$emit("snackbar-set", {
+          message: "Deleted character",
+          status: "success",
+        });
+        await this.fetchCharacters();
+        console.log(data);
+        return;
+      }
+      this.$emit("snackbar-set", {
+        message: data.message,
+        status: "error",
+      });
+    },
+    async fetchCharacters() {
+      const res = await fetch("/characters");
+      const data = await res.json();
+      this.characters = data;
+    },
+  },
 
   async created() {
-    const res = await fetch("/characters");
-    const data = await res.json();
-    this.characters = data;
+    this.fetchCharacters();
   },
   data() {
     return {
