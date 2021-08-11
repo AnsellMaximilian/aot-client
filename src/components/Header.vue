@@ -12,7 +12,19 @@
         <ul class="auth-links">
           <!-- <li><router-link to="/">Sign Up</router-link></li> -->
           <li v-if="!user"><router-link to="/login">Login</router-link></li>
-          <li v-else>{{ user.name }}</li>
+          <li v-else class="account-btn" @click="toggleAccountDropdown">
+            <span>{{ user.name }}</span> <i class="fas fa-sort-down"></i>
+            <div v-show="accountDropdownOpen" class="dropdown">
+              <div class="close-btn" @click="toggleAccountDropdown">
+                <span>&times;</span>
+              </div>
+              <ul>
+                <li>My Account</li>
+                <hr />
+                <li>Logout</li>
+              </ul>
+            </div>
+          </li>
         </ul>
       </div>
     </div>
@@ -24,6 +36,17 @@ export default {
   name: "Header",
   props: {
     user: Object,
+  },
+  data() {
+    return {
+      accountDropdownOpen: false,
+    };
+  },
+  methods: {
+    toggleAccountDropdown(e) {
+      e.stopPropagation();
+      this.accountDropdownOpen = !this.accountDropdownOpen;
+    },
   },
 };
 </script>
@@ -50,7 +73,32 @@ header {
       .auth-links {
         margin-left: auto;
       }
-      ul {
+      .account-btn {
+        position: relative;
+        cursor: pointer;
+        .dropdown {
+          padding: 1rem 0.5rem 0.5rem;
+          background-color: white;
+          color: $primary;
+          position: absolute;
+          width: 10rem;
+          bottom: 0;
+          left: 50%;
+          transform: translate(-50%, 100%);
+          border-radius: 0.5rem;
+          .close-btn {
+            z-index: 100;
+            margin-left: auto;
+            font-size: 1.5rem;
+            width: 2rem;
+            height: 2rem;
+            position: absolute;
+            right: 0;
+            top: 0;
+          }
+        }
+      }
+      & > ul {
         display: flex;
         a {
           display: inline-block;
