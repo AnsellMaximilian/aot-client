@@ -19,7 +19,7 @@
       </div>
     </div>
   </div>
-  <Spinner v-else iconClass="fas fa-smile-beam" />
+  <Spinner v-else :image="true" />
 </template>
 
 <script>

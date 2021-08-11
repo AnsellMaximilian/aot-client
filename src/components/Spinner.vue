@@ -1,5 +1,8 @@
 <template>
-  <i :class="[iconClass, 'spinner']"></i>
+  <div class="spinner">
+    <img v-if="image" src="../assets/sc-logo.png" alt="" />
+    <i v-else :class="[iconClass]"></i>
+  </div>
 </template>
 
 <script>
@@ -7,6 +10,7 @@ export default {
   name: "Spinner",
   props: {
     iconClass: String,
+    image: String,
   },
 };
 </script>
@@ -17,7 +21,13 @@ $secondary: #e49631;
 
 .spinner {
   font-size: 3rem;
-  margin-top: 3rem;
+  margin: 3rem auto;
   animation: spin 1s linear infinite;
+  img {
+    width: 5rem;
+    .img {
+      width: 100%;
+    }
+  }
 }
 </style>
