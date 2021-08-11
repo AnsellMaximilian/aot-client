@@ -1,4 +1,13 @@
 <template>
+  <div class="header">
+    <h1>Characters</h1>
+    <router-link
+      v-if="!!user && user.isAdmin"
+      class="cta"
+      to="/characters/create"
+      >Create New</router-link
+    >
+  </div>
   <div class="list" v-if="characters.length > 0">
     <div class="card" v-for="character in characters" :key="character.id">
       <div class="card-header">
@@ -16,7 +25,7 @@
             <span>Gender:</span> <span>{{ character.gender }}</span>
           </div>
         </div>
-        <div class="controls">
+        <div class="controls" v-if="!!user && user.isAdmin">
           <button class="warning">Edit</button>
           <button class="danger">Delete</button>
         </div>
@@ -24,17 +33,14 @@
     </div>
   </div>
   <Spinner v-else :image="true" />
-  <FloatingActionButton iconClass="fas fa-plus" />
 </template>
 
 <script>
 import Spinner from "@/components/Spinner.vue";
-import FloatingActionButton from "@/components/FloatingActionButton.vue";
 export default {
   name: "Header",
   components: {
     Spinner,
-    FloatingActionButton,
   },
   emits: ["snackbar-set"],
 
@@ -48,13 +54,27 @@ export default {
       characters: [],
     };
   },
+  props: {
+    user: Object,
+  },
 };
 </script>
 
 <style lang="scss" scoped>
 $primary: #2a1d1d;
 $secondary: #e49631;
-
+.header {
+  width: 1000px;
+  margin: 0 auto;
+  max-width: 100%;
+  padding: 0 1rem;
+  .cta {
+    margin-top: 1rem;
+    background-color: $secondary;
+  }
+  // display: flex;
+  // justify-content: space-between;
+}
 .list {
   display: flex;
   flex-wrap: wrap;
@@ -113,6 +133,13 @@ $secondary: #e49631;
         border-radius: 10rem;
         border: none;
         margin-left: 1rem;
+        cursor: pointer;
+        &:hover {
+          filter: brightness(0.9);
+        }
+        &:active {
+          transform: scale(0.95);
+        }
         &.danger {
           background-color: rgb(211, 0, 0);
         }

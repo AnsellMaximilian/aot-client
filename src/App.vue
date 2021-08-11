@@ -6,6 +6,7 @@
     @logged-in="setUser"
     @snackbar-set="setSnackbar"
     :characters="characters"
+    :user="user"
   />
 
   <footer>
@@ -136,6 +137,17 @@ ul {
       color: #e49631;
     }
   }
+}
+.cta {
+  padding: 1rem 2rem;
+  font-weight: bold;
+  border: none;
+  color: white;
+  border-radius: 10rem;
+  background-color: $primary;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-block;
 }
 
 @keyframes spin {
