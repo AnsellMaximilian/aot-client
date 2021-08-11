@@ -30,5 +30,12 @@ $secondary: #e49631;
   margin: 1.25rem;
   box-shadow: 0.35rem 0.35rem 1rem rgba(39, 39, 39, 0.322);
   border-radius: 10rem;
+  cursor: pointer;
+  &:hover {
+    opacity: 0.8;
+  }
+  &:active {
+    transform: scale(0.95);
+  }
 }
 </style>
