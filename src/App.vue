@@ -7,6 +7,14 @@
     @snackbar-set="setSnackbar"
     :characters="characters"
   />
+
+  <footer>
+    <div>
+      <i class="fab fa-github"></i>
+      Made by
+      <a href="https://ansellmaximilian.github.io">Ansell Maximilian</a>
+    </div>
+  </footer>
   <Snackbar
     v-if="snackbarMessage"
     @snackbar-set="setSnackbar"
@@ -82,6 +90,8 @@ export default {
 </script>
 
 <style lang="scss">
+$primary: #2a1d1d;
+$secondary: #e49631;
 * {
   box-sizing: border-box;
 }
@@ -90,6 +100,15 @@ html {
   margin: 0;
   padding: 0;
   height: 100%;
+}
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0;
 }
 ul {
   padding: 0;
@@ -125,6 +144,20 @@ ul {
   }
   to {
     transform: rotate(360deg);
+  }
+}
+footer {
+  background-color: $secondary;
+  color: white;
+  padding: 2rem;
+  font-size: 1.15rem;
+  a {
+    color: $primary;
+    text-decoration: none;
+    font-weight: bold;
+    &:hover {
+      text-decoration: underline;
+    }
   }
 }
 </style>
