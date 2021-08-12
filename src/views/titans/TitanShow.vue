@@ -90,15 +90,17 @@ export default {
 $primary: #2a1d1d;
 $secondary: #e49631;
 .show-container {
-  margin-bottom: 2rem;
   overflow: hidden;
   padding: 0 1rem;
+  max-width: 100%;
+  width: 950px;
+  margin: 0 auto 2rem;
 
   h1 {
     margin-bottom: 2rem;
   }
   .info {
-    margin-top: 1.25rem;
+    margin-top: 2rem;
     font-size: 1.25rem;
   }
   .controls {
