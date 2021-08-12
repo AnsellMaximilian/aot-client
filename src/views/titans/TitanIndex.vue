@@ -110,6 +110,7 @@ $secondary: #e49631;
   flex-wrap: wrap;
   justify-content: center;
   margin-top: 2rem;
+  margin-bottom: 2rem;
 }
 .card {
   width: 250px;
