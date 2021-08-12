@@ -5,7 +5,7 @@
       <div class="menu-btn" @click="navOpen = !navOpen">
         <span></span><span></span><span></span>
       </div>
-      <div :class="{ nav: true, open: navOpen }">
+      <div :class="{ nav: true, open: navOpen }" @click="navOpen = false">
         <ul>
           <li><router-link to="/characters">Characters</router-link></li>
           <li><router-link to="/titans">Titans</router-link></li>
