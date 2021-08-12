@@ -1,6 +1,6 @@
 <template>
   <div class="main-content">
-    <div>
+    <div class="main-content__top">
       <div id="nav">
         <Header :user="user" @logged-out="logOut" />
       </div>
@@ -9,6 +9,7 @@
         @snackbar-set="setSnackbar"
         :characters="characters"
         :user="user"
+        class="router-content"
       />
     </div>
     <footer>
@@ -181,5 +182,15 @@ footer {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  &__top {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+  }
+}
+.router-content {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
 }
 </style>

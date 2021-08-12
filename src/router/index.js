@@ -7,6 +7,7 @@ import CharacterIndex from "../views/characters/CharacterIndex.vue";
 import CharacterShow from "../views/characters/CharacterShow.vue";
 import CharacterEdit from "../views/characters/CharacterEdit.vue";
 import Login from "../views/auth/Login.vue";
+import Docs from "../views/Docs.vue";
 
 const routes = [
   {
@@ -40,6 +41,11 @@ const routes = [
         component: CharacterEdit,
       },
     ],
+  },
+  {
+    path: "/docs",
+    name: "Docs",
+    component: Docs,
   },
   {
     path: "/login",
