@@ -74,8 +74,7 @@ export default {
       if (this.picture) {
         createData.append("picture", this.picture);
       }
-      console.log(createData.get("name"));
-      const res = await fetch(process.env.VUE_APP_API_URL +"/titans", {
+      const res = await fetch(process.env.VUE_APP_API_URL + "/titans", {
         method: "POST",
         headers: {
           Accept: "application/json",
@@ -93,7 +92,6 @@ export default {
 
         return;
       }
-      console.log(data);
       this.$emit("snackbar-set", { message: data.message, status: "error" });
     },
   },

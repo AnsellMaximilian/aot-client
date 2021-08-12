@@ -1,8 +1,20 @@
 <template>
   <div v-if="titan" class="show-container">
     <h1>{{ titan.name }}</h1>
-    <div class="image-container">
-      <img :src="titan.picture_url" alt="" />
+    <div class="images">
+      <div class="image-container">
+        <img :src="titan.picture_url" alt="" />
+      </div>
+      <router-link
+        :to="`/characters/${titan.shifter.id}`"
+        v-if="titan.shifter"
+        class="shifter-image-container"
+      >
+        <img :src="titan.shifter.picture_url" alt="" />
+      </router-link>
+    </div>
+    <div class="info">
+      {{ titan.description }}
     </div>
     <div class="controls" v-if="!!user && user.isAdmin">
       <router-link :to="`/titans/${titan.id}/edit`" class="warning button"
@@ -79,10 +91,15 @@ $primary: #2a1d1d;
 $secondary: #e49631;
 .show-container {
   margin-bottom: 2rem;
+  overflow: hidden;
   padding: 0 1rem;
 
   h1 {
     margin-bottom: 2rem;
+  }
+  .info {
+    margin-top: 1.25rem;
+    font-size: 1.25rem;
   }
   .controls {
     padding: 1rem;
@@ -113,20 +130,44 @@ $secondary: #e49631;
       }
     }
   }
-  .image-container {
-    width: 400px;
-    aspect-ratio: 1/1;
-    max-width: 100%;
+  .images {
+    position: relative;
+    width: min-content;
     margin: 0 auto;
     max-width: 100%;
-    overflow: hidden;
-    border-radius: 50%;
-    border: 1rem solid white;
     img {
       width: 100%;
       height: 100%;
       object-fit: cover;
       object-position: center;
+    }
+    .image-container {
+      width: 400px;
+      aspect-ratio: 1/1;
+      position: relative;
+      max-width: 100%;
+      margin: 0 auto;
+      max-width: 100%;
+      overflow: hidden;
+      border-radius: 50%;
+      border: 1rem solid white;
+    }
+    .shifter-image-container {
+      display: block;
+      border-radius: 50%;
+      position: absolute;
+      border: 0.5rem solid $secondary;
+      width: 40%;
+      overflow: hidden;
+      right: 0;
+      top: 75%;
+      transform: translate(15%, -50%);
+      aspect-ratio: 1/1;
+      img {
+        &:hover {
+          filter: brightness(0.7);
+        }
+      }
     }
   }
 }
