@@ -26,7 +26,7 @@ export default {
   name: "TitanShow",
   methods: {
     async deleteCharacter(id) {
-      const res = await fetch(`/characters/${id}`, {
+      const res = await fetch(process.env.VUE_APP_API_URL +`/characters/${id}`, {
         method: "DELETE",
         headers: {
           Accept: "application/json",
@@ -59,7 +59,7 @@ export default {
   },
   async created() {
     console.log(this.user);
-    const res = await fetch(`/characters/${this.$route.params.id}`);
+    const res = await fetch(process.env.VUE_APP_API_URL +`/characters/${this.$route.params.id}`);
     const data = await res.json();
     if (res.ok) {
       console.log(data);

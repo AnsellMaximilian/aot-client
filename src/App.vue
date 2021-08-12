@@ -42,12 +42,15 @@ export default {
     const authToken = localStorage.getItem("aot_token");
     // If there's an auth token in local storage, attempt to log in user.
     if (authToken) {
-      const res = await fetch("/tokens/get-user-from-token", {
-        headers: {
-          Accept: "application/json",
-          Authorization: `Bearer ${authToken}`,
-        },
-      });
+      const res = await fetch(
+        process.env.VUE_APP_API_URL + "/tokens/get-user-from-token",
+        {
+          headers: {
+            Accept: "application/json",
+            Authorization: `Bearer ${authToken}`,
+          },
+        }
+      );
 
       const data = await res.json();
       if (res.ok) {

@@ -45,7 +45,7 @@ export default {
   emits: ["snackbar-set"],
   methods: {
     async deletetitan(id) {
-      const res = await fetch(`/titans/${id}`, {
+      const res = await fetch(process.env.VUE_APP_API_URL + `/titans/${id}`, {
         method: "DELETE",
         headers: {
           Accept: "application/json",
@@ -70,7 +70,7 @@ export default {
       });
     },
     async fetchtitans() {
-      const res = await fetch("/titans");
+      const res = await fetch(process.env.VUE_APP_API_URL + "/titans");
       const data = await res.json();
       this.titans = data;
     },

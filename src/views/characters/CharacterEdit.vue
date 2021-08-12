@@ -62,7 +62,9 @@ export default {
     };
   },
   async created() {
-    const res = await fetch(`/characters/${this.$route.params.id}`);
+    const res = await fetch(
+      process.env.VUE_APP_API_URL + `/characters/${this.$route.params.id}`
+    );
     const data = await res.json();
     if (res.ok) {
       this.name = data.name;
@@ -86,15 +88,18 @@ export default {
       }
       createData.append("_method", "PUT");
       console.log(createData.get("name"));
-      const res = await fetch(`/characters/${this.$route.params.id}`, {
-        method: "POST",
-        headers: {
-          Accept: "application/json",
-          //   "Content-Type": "multipart/form-data",
-          Authorization: `Bearer ${localStorage.getItem("aot_token")}`,
-        },
-        body: createData,
-      });
+      const res = await fetch(
+        process.env.VUE_APP_API_URL + `/characters/${this.$route.params.id}`,
+        {
+          method: "POST",
+          headers: {
+            Accept: "application/json",
+            //   "Content-Type": "multipart/form-data",
+            Authorization: `Bearer ${localStorage.getItem("aot_token")}`,
+          },
+          body: createData,
+        }
+      );
       const data = await res.json();
       if (res.ok) {
         console.log(data);

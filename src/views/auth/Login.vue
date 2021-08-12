@@ -43,7 +43,7 @@ export default {
     async handleSubmit(e) {
       e.preventDefault();
       const postData = { email: this.email, password: this.password };
-      const res = await fetch("/login", {
+      const res = await fetch(process.env.VUE_APP_API_URL +"/login", {
         method: "POST",
         headers: {
           Accept: "application/json",

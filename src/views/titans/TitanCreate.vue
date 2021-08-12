@@ -75,7 +75,7 @@ export default {
         createData.append("picture", this.picture);
       }
       console.log(createData.get("name"));
-      const res = await fetch("/titans", {
+      const res = await fetch(process.env.VUE_APP_API_URL +"/titans", {
         method: "POST",
         headers: {
           Accept: "application/json",

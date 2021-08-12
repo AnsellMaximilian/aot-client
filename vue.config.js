@@ -1,5 +1,5 @@
 module.exports = {
-  devServer: {
-    proxy: "https://attackontitanapi.herokuapp.com/api",
-  },
+  // devServer: {
+  //   proxy: "https://attackontitanapi.herokuapp.com/api",
+  // },
 };
