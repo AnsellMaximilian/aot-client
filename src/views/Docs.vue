@@ -121,6 +121,7 @@ h1 {
   }
   .content {
     margin-left: $sidebar-width;
+    margin-bottom: 2rem;
     .sections {
       text-align: left;
       section {
