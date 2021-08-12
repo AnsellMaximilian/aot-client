@@ -1,7 +1,9 @@
 <template>
   <div class="form-container">
-    <h1>Create</h1>
-    <form @submit="handleSubmit" enctype="multipart/form-data">
+    <h1>Edit</h1>
+    <Spinner v-if="loadingOldData" :image="true" />
+
+    <form v-else @submit="handleSubmit" enctype="multipart/form-data">
       <div class="form-group">
         <label for="name">Name</label>
         <input
@@ -12,21 +14,25 @@
           v-model="name"
         />
       </div>
-      <div class="form-group form-group-radio">
-        <span>Gender</span>
-        <div class="">
-          <input type="radio" id="gender_male" value="male" v-model="gender" />
-          <label for="gender_male">Male</label>
-        </div>
-        <div class="">
-          <input
-            type="radio"
-            id="gender_female"
-            value="female"
-            v-model="gender"
-          />
-          <label for="gender_female">Female</label>
-        </div>
+      <div class="form-group">
+        <label for="description">Description</label>
+        <textarea
+          type="text"
+          name="description"
+          id="description"
+          placeholder="Description"
+          v-model="description"
+        ></textarea>
+      </div>
+      <div class="form-group">
+        <label for="name">Height</label>
+        <input
+          type="number"
+          name="height"
+          id="height"
+          placeholder="Height in meters"
+          v-model="height"
+        />
       </div>
       <div class="form-group">
         <label for="picture">Picture</label>
@@ -45,14 +51,31 @@
 </template>
 
 <script>
+import Spinner from "@/components/Spinner.vue";
 export default {
-  name: "CharacterCreate",
+  name: "CharacterEdit",
+  components: {
+    Spinner,
+  },
   data() {
     return {
       name: "",
-      gender: "male",
       picture: null,
+      height: 0,
+      description: "",
+      loadingOldData: true,
     };
+  },
+  async created() {
+    const res = await fetch(`/titans/${this.$route.params.id}`);
+    const data = await res.json();
+    if (res.ok) {
+      this.name = data.name;
+      this.description = data.description;
+      this.height = data.height_m;
+      this.loadingOldData = false;
+      return;
+    }
   },
   methods: {
     handleFileChange(e) {
@@ -63,12 +86,14 @@ export default {
       e.preventDefault();
       const createData = new FormData();
       createData.append("name", this.name);
-      createData.append("gender", this.gender);
+      createData.append("height_m", this.height);
+      createData.append("description", this.description);
       if (this.picture) {
         createData.append("picture", this.picture);
       }
+      createData.append("_method", "PUT");
       console.log(createData.get("name"));
-      const res = await fetch("http://localhost:8000/api/characters", {
+      const res = await fetch(`/titans/${this.$route.params.id}`, {
         method: "POST",
         headers: {
           Accept: "application/json",
@@ -79,8 +104,9 @@ export default {
       });
       const data = await res.json();
       if (res.ok) {
+        console.log(data);
         this.$emit("snackbar-set", {
-          message: "Created character",
+          message: "Edited titan",
           status: "success",
         });
 
@@ -116,7 +142,8 @@ $secondary: #e49631;
     label {
       margin-bottom: 0.5rem;
     }
-    input {
+    input,
+    textarea {
       padding: 0.5rem;
       font-size: 1rem;
     }

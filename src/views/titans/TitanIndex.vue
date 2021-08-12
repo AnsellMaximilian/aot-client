@@ -1,39 +1,33 @@
 <template>
   <div class="header">
-    <h1>Characters</h1>
-    <router-link
-      v-if="!!user && user.isAdmin"
-      class="cta"
-      to="/characters/create"
+    <h1>Titans</h1>
+    <router-link v-if="!!user && user.isAdmin" class="cta" to="/titans/create"
       >Create New</router-link
     >
   </div>
-  <div class="list" v-if="characters.length > 0">
-    <div class="card" v-for="character in characters" :key="character.id">
+  <div class="list" v-if="titans.length > 0">
+    <div class="card" v-for="titan in titans" :key="titan.id">
       <div class="card-header">
-        <router-link :to="`/characters/${character.id}`">
-          {{ character.name }}</router-link
-        >
+        <router-link :to="`/titans/${titan.id}`"> {{ titan.name }}</router-link>
       </div>
       <div class="card-body">
-        <img :src="character.picture_url" alt="" />
+        <img :src="titan.picture_url" alt="" />
         <div class="info">
           <div>
-            <span>Full Name:</span> <span>{{ character.name }}</span>
+            <span>Name:</span> <span>{{ titan.name }}</span>
           </div>
           <div>
-            <span>Gender:</span> <span>{{ character.gender }}</span>
+            <span>Description:</span> <span>{{ titan.description }}</span>
+          </div>
+          <div>
+            <span>Height:</span> <span>{{ titan.height_m }}</span>
           </div>
         </div>
         <div class="controls" v-if="!!user && user.isAdmin">
-          <router-link
-            :to="`/characters/${character.id}/edit`"
-            class="warning button"
+          <router-link :to="`/titans/${titan.id}/edit`" class="warning button"
             >Edit</router-link
           >
-          <button class="danger" @click="deleteCharacter(character.id)">
-            Delete
-          </button>
+          <button class="danger" @click="deletetitan(titan.id)">Delete</button>
         </div>
       </div>
     </div>
@@ -50,8 +44,8 @@ export default {
   },
   emits: ["snackbar-set"],
   methods: {
-    async deleteCharacter(id) {
-      const res = await fetch(`/characters/${id}`, {
+    async deletetitan(id) {
+      const res = await fetch(`/titans/${id}`, {
         method: "DELETE",
         headers: {
           Accept: "application/json",
@@ -61,12 +55,12 @@ export default {
       });
       const data = await res.json();
       if (res.ok) {
-        this.characters = [];
+        this.titans = [];
         this.$emit("snackbar-set", {
-          message: "Deleted character",
+          message: "Deleted titan",
           status: "success",
         });
-        await this.fetchCharacters();
+        await this.fetchtitans();
         console.log(data);
         return;
       }
@@ -75,19 +69,19 @@ export default {
         status: "error",
       });
     },
-    async fetchCharacters() {
-      const res = await fetch("/characters");
+    async fetchtitans() {
+      const res = await fetch("/titans");
       const data = await res.json();
-      this.characters = data;
+      this.titans = data;
     },
   },
 
   async created() {
-    this.fetchCharacters();
+    this.fetchtitans();
   },
   data() {
     return {
-      characters: [],
+      titans: [],
     };
   },
   props: {

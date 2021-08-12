@@ -12,22 +12,27 @@
           v-model="name"
         />
       </div>
-      <div class="form-group form-group-radio">
-        <span>Gender</span>
-        <div class="">
-          <input type="radio" id="gender_male" value="male" v-model="gender" />
-          <label for="gender_male">Male</label>
-        </div>
-        <div class="">
-          <input
-            type="radio"
-            id="gender_female"
-            value="female"
-            v-model="gender"
-          />
-          <label for="gender_female">Female</label>
-        </div>
+      <div class="form-group">
+        <label for="description">Description</label>
+        <textarea
+          type="text"
+          name="description"
+          id="description"
+          placeholder="Description"
+          v-model="description"
+        ></textarea>
       </div>
+      <div class="form-group">
+        <label for="name">Height</label>
+        <input
+          type="number"
+          name="height"
+          id="height"
+          placeholder="Height in meters"
+          v-model="height"
+        />
+      </div>
+
       <div class="form-group">
         <label for="picture">Picture</label>
         <input
@@ -46,12 +51,13 @@
 
 <script>
 export default {
-  name: "CharacterCreate",
+  name: "TitanCreate",
   data() {
     return {
       name: "",
-      gender: "male",
       picture: null,
+      height: 0,
+      description: "",
     };
   },
   methods: {
@@ -63,12 +69,13 @@ export default {
       e.preventDefault();
       const createData = new FormData();
       createData.append("name", this.name);
-      createData.append("gender", this.gender);
+      createData.append("height_m", this.height);
+      createData.append("description", this.description);
       if (this.picture) {
         createData.append("picture", this.picture);
       }
       console.log(createData.get("name"));
-      const res = await fetch("http://localhost:8000/api/characters", {
+      const res = await fetch("/titans", {
         method: "POST",
         headers: {
           Accept: "application/json",
@@ -80,7 +87,7 @@ export default {
       const data = await res.json();
       if (res.ok) {
         this.$emit("snackbar-set", {
-          message: "Created character",
+          message: "Created titan",
           status: "success",
         });
 
@@ -116,7 +123,8 @@ $secondary: #e49631;
     label {
       margin-bottom: 0.5rem;
     }
-    input {
+    input,
+    textarea {
       padding: 0.5rem;
       font-size: 1rem;
     }

@@ -8,6 +8,7 @@
       <div :class="{ nav: true, open: navOpen }">
         <ul>
           <li><router-link to="/characters">Characters</router-link></li>
+          <li><router-link to="/titans">Titans</router-link></li>
           <li><router-link to="/docs">Docs</router-link></li>
           <!-- <li><router-link to="/locations">Locations</router-link></li> -->
         </ul>
