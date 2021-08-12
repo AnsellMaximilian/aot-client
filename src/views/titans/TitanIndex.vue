@@ -16,11 +16,12 @@
           <div>
             <span>Name:</span> <span>{{ titan.name }}</span>
           </div>
+
           <div>
-            <span>Description:</span> <span>{{ titan.description }}</span>
+            <span>Height:</span> <span>{{ titan.height_m }} meters</span>
           </div>
-          <div>
-            <span>Height:</span> <span>{{ titan.height_m }}</span>
+          <div class="description">
+            <span>Description:</span> <span>{{ titan.description }}</span>
           </div>
         </div>
         <div class="controls" v-if="!!user && user.isAdmin">
@@ -150,6 +151,21 @@ $secondary: #e49631;
       & > div {
         display: grid;
         grid-template-columns: 1fr 1fr;
+        margin-bottom: 0.5rem;
+        & > span {
+          &:first-child {
+            font-weight: bold;
+          }
+        }
+      }
+      & > .description {
+        display: block;
+        & > span {
+          display: block;
+          &:last-child {
+            margin-top: 0.25rem;
+          }
+        }
       }
     }
     .controls {
