@@ -1,21 +1,24 @@
 <template>
-  <div id="nav">
-    <Header :user="user" @logged-out="logOut" />
-  </div>
-  <router-view
-    @logged-in="setUser"
-    @snackbar-set="setSnackbar"
-    :characters="characters"
-    :user="user"
-  />
-
-  <footer>
+  <div class="main-content">
     <div>
-      <i class="fab fa-github"></i>
-      Made by
-      <a href="https://ansellmaximilian.github.io">Ansell Maximilian</a>
+      <div id="nav">
+        <Header :user="user" @logged-out="logOut" />
+      </div>
+      <router-view
+        @logged-in="setUser"
+        @snackbar-set="setSnackbar"
+        :characters="characters"
+        :user="user"
+      />
     </div>
-  </footer>
+    <footer>
+      <div>
+        <i class="fab fa-github"></i>
+        Made by
+        <a href="https://ansellmaximilian.github.io">Ansell Maximilian</a>
+      </div>
+    </footer>
+  </div>
   <Snackbar
     v-if="snackbarMessage"
     @snackbar-set="setSnackbar"
@@ -171,5 +174,12 @@ footer {
       text-decoration: underline;
     }
   }
+}
+
+.main-content {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 </style>
