@@ -107,6 +107,9 @@ header {
       width: 100%;
       height: 0;
       overflow: hidden;
+      @media screen and (min-width: 700px) {
+        overflow: visible;
+      }
       &.open {
         height: auto;
       }
@@ -116,6 +119,7 @@ header {
       .account-btn {
         position: relative;
         cursor: pointer;
+        display: block;
         .dropdown {
           padding: 1rem 0.5rem 0.5rem;
           background-color: white;
@@ -123,9 +127,17 @@ header {
           position: absolute;
           width: 10rem;
           bottom: 0;
-          left: 50%;
-          transform: translate(-50%, 100%);
+          right: 0;
+          transform: translate(0, 100%);
           border-radius: 0.5rem;
+          z-index: 10000;
+          color: rgba(0, 0, 0, 0.678);
+
+          ul {
+            li:hover {
+              color: black;
+            }
+          }
           .close-btn {
             margin-left: auto;
             font-size: 1.5rem;
@@ -134,6 +146,12 @@ header {
             position: absolute;
             right: 0;
             top: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            &:hover {
+              color: black;
+            }
           }
         }
       }
