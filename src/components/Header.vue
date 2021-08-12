@@ -2,7 +2,10 @@
   <header>
     <div class="navbar">
       <div class="brand"><router-link to="/">Attack On Titan</router-link></div>
-      <div class="nav">
+      <div class="menu-btn" @click="navOpen = !navOpen">
+        <span></span><span></span><span></span>
+      </div>
+      <div :class="{ nav: true, open: navOpen }">
         <ul>
           <li><router-link to="/characters">Characters</router-link></li>
           <li><router-link to="/about">Titans</router-link></li>
@@ -39,6 +42,7 @@ export default {
   data() {
     return {
       accountDropdownOpen: false,
+      navOpen: false,
     };
   },
   methods: {
@@ -66,6 +70,26 @@ header {
   padding: 1rem;
   .navbar {
     display: flex;
+    flex-wrap: wrap;
+    @media screen and (min-width: 700px) {
+      flex-wrap: nowrap;
+    }
+    .menu-btn {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      cursor: pointer;
+      margin-left: auto;
+      @media screen and (min-width: 700px) {
+        display: none;
+      }
+      & > span {
+        width: 1.75rem;
+        height: 0.15rem;
+        background-color: white;
+        display: block;
+      }
+    }
     .brand {
       margin-right: 1rem;
       font-weight: bold;
@@ -73,6 +97,19 @@ header {
     .nav {
       flex-grow: 1;
       display: flex;
+      flex-wrap: wrap;
+      @media screen and (min-width: 700px) {
+        flex-wrap: nowrap;
+        height: auto;
+        width: auto;
+      }
+      // small
+      width: 100%;
+      height: 0;
+      overflow: hidden;
+      &.open {
+        height: auto;
+      }
       .auth-links {
         margin-left: auto;
       }
@@ -102,9 +139,24 @@ header {
       }
       & > ul {
         display: flex;
+        flex-wrap: wrap;
+        width: 100%;
+        @media screen and (min-width: 700px) {
+          flex-wrap: nowrap;
+          width: auto;
+        }
+        li {
+          width: 100%;
+          text-align: left;
+        }
         a {
           display: inline-block;
-          margin-left: 0.75rem;
+          width: 100%;
+          padding: 0.5rem 0;
+          @media screen and (min-width: 700px) {
+            margin-left: 0.75rem;
+            padding: 0;
+          }
         }
       }
     }
