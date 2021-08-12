@@ -1,23 +1,64 @@
 <template>
-  <div v-if="titan" class="container">
-    {{ titan.name }}
+  <div v-if="titan" class="show-container">
+    <h1>{{ titan.name }}</h1>
+    <div class="image-container">
+      <img :src="titan.picture_url" alt="" />
+    </div>
+    <div class="controls" v-if="!!user && user.isAdmin">
+      <router-link :to="`/titans/${titan.id}/edit`" class="warning button"
+        >Edit</router-link
+      >
+      <button class="danger" @click="deleteTitan(titan.id)">Delete</button>
+    </div>
   </div>
-  <Spinner v-else iconClass="fas fa-smile-beam" />
+  <Spinner v-else :image="true" />
 </template>
 
 <script>
 import Spinner from "@/components/Spinner.vue";
+import router from "@/router/index";
 
 export default {
   name: "TitanShow",
+  methods: {
+    async deleteTitan(id) {
+      const res = await fetch(`/titans/${id}`, {
+        method: "DELETE",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem("aot_token")}`,
+        },
+      });
+      const data = await res.json();
+      if (res.ok) {
+        this.characters = [];
+        this.$emit("snackbar-set", {
+          message: "Deleted titan",
+          status: "success",
+        });
+        router.push("/titans");
+
+        return;
+      }
+      this.$emit("snackbar-set", {
+        message: data.message,
+        status: "error",
+      });
+    },
+  },
   components: {
     Spinner,
   },
+  props: {
+    user: Object,
+  },
   async created() {
-    console.log(this.$route.params.id);
+    console.log(this.user);
     const res = await fetch(`/titans/${this.$route.params.id}`);
     const data = await res.json();
     if (res.ok) {
+      console.log(data);
       this.titan = data;
       return;
     }
@@ -34,4 +75,57 @@ export default {
 <style lang="scss" scoped>
 $primary: #2a1d1d;
 $secondary: #e49631;
+.show-container {
+  margin-bottom: 2rem;
+  padding: 0 1rem;
+
+  h1 {
+    margin-bottom: 2rem;
+  }
+  .controls {
+    padding: 1rem;
+    display: flex;
+    justify-content: center;
+    button,
+    .button {
+      text-decoration: none;
+      padding: 0.75rem 1.25rem;
+      color: white;
+      font-weight: bold;
+      border-radius: 10rem;
+      border: none;
+      margin: 0 1rem;
+      cursor: pointer;
+      font-size: 1.25rem;
+      &:hover {
+        filter: brightness(0.9);
+      }
+      &:active {
+        transform: scale(0.95);
+      }
+      &.danger {
+        background-color: rgb(211, 0, 0);
+      }
+      &.warning {
+        background-color: rgb(255, 208, 0);
+      }
+    }
+  }
+  .image-container {
+    width: 400px;
+    aspect-ratio: 1/1;
+    max-width: 100%;
+    margin: 0 auto;
+    max-width: 100%;
+    overflow: hidden;
+    border-radius: 50%;
+    border: 1rem solid white;
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+    }
+  }
+}
 </style>
