@@ -1,35 +1,9 @@
-# aot-client
+# ATTACK ON TITAN DOCUMENTATION
 
-## Project setup
+Vue.js application that consumes an API I created using Laravel. This serves as a documentation for the API as well as to showcase what kind of data the API contains.
 
-```
-npm install
-```
+## The API
 
-### Compiles and hot-reloads for development
+The API can be reached with [this URL](https://attackontitanapi.heroku.com).
 
-```
-npm run serve
-```
-
-### Compiles and minifies for production
-
-```
-npm run build
-```
-
-### Lints and fixes files
-
-```
-npm run lint
-```
-
-### Customize configuration
-
-See [Configuration Reference](https://cli.vuejs.org/config/).
-
-### TODO
-
-- React to param change in characters/:id
-- Create Character
-- Not found response for character/:id. Why is it returning html?
+To actually consume the API, prepend /api to every request to the base URL.
