@@ -15,7 +15,7 @@
           <!-- <li><router-link to="/">Sign Up</router-link></li> -->
           <li v-if="!user"><router-link to="/login">Login</router-link></li>
           <li v-else class="account-btn" @click="toggleAccountDropdown">
-            <span>{{ user.name }}</span> <i class="fas fa-sort-down"></i>
+            <span>{{ user.name }} <i class="fas fa-sort-down"></i></span>
             <div v-show="accountDropdownOpen" class="dropdown">
               <div class="close-btn" @click="toggleAccountDropdown">
                 <span>&times;</span>
@@ -112,6 +112,7 @@ header {
       }
       &.open {
         height: auto;
+        overflow: visible;
       }
       .auth-links {
         margin-left: auto;
@@ -127,12 +128,16 @@ header {
           position: absolute;
           width: 10rem;
           bottom: 0;
-          right: 0;
+          left: 0;
           transform: translate(0, 100%);
           border-radius: 0.5rem;
           z-index: 10000;
           color: rgba(0, 0, 0, 0.678);
-
+          @media screen and (min-width: 700px) {
+            bottom: 0;
+            right: 0;
+            transform: translate(0, 100%);
+          }
           ul {
             li:hover {
               color: black;
@@ -167,7 +172,8 @@ header {
           width: 100%;
           text-align: left;
         }
-        a {
+        a,
+        span {
           display: inline-block;
           width: 100%;
           padding: 0.5rem 0;
