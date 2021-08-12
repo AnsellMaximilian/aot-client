@@ -5,7 +5,7 @@
         <h1>Attack on Titan API</h1>
         <p>Get data for things Attack on Titan related.</p>
       </div>
-      <router-link to="/" class="cta"> See the Docs </router-link>
+      <router-link to="/docs" class="cta"> See the Docs </router-link>
     </div>
     <div class="container">
       <article class="api-item">
