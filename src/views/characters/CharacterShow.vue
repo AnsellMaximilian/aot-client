@@ -26,14 +26,17 @@ export default {
   name: "TitanShow",
   methods: {
     async deleteCharacter(id) {
-      const res = await fetch(process.env.VUE_APP_API_URL +`/characters/${id}`, {
-        method: "DELETE",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${localStorage.getItem("aot_token")}`,
-        },
-      });
+      const res = await fetch(
+        process.env.VUE_APP_API_URL + `/characters/${id}`,
+        {
+          method: "DELETE",
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${localStorage.getItem("aot_token")}`,
+          },
+        }
+      );
       const data = await res.json();
       if (res.ok) {
         this.characters = [];
@@ -59,7 +62,9 @@ export default {
   },
   async created() {
     console.log(this.user);
-    const res = await fetch(process.env.VUE_APP_API_URL +`/characters/${this.$route.params.id}`);
+    const res = await fetch(
+      process.env.VUE_APP_API_URL + `/characters/${this.$route.params.id}`
+    );
     const data = await res.json();
     if (res.ok) {
       console.log(data);
@@ -116,14 +121,18 @@ $secondary: #e49631;
     }
   }
   .image-container {
-    width: 400px;
-    aspect-ratio: 1/1;
+    width: 300px;
+    height: 300px;
     max-width: 100%;
     margin: 0 auto;
     max-width: 100%;
     overflow: hidden;
     border-radius: 50%;
     border: 1rem solid white;
+    @media screen and (min-width: 700px) {
+      width: 400px;
+      height: 400px;
+    }
     img {
       width: 100%;
       height: 100%;
