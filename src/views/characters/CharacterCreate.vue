@@ -68,7 +68,7 @@ export default {
         createData.append("picture", this.picture);
       }
       console.log(createData.get("name"));
-      const res = await fetch("http://localhost:8000/api/characters", {
+      const res = await fetch("/characters", {
         method: "POST",
         headers: {
           Accept: "application/json",

@@ -43,7 +43,7 @@ export default {
     async handleSubmit(e) {
       e.preventDefault();
       const postData = { email: this.email, password: this.password };
-      const res = await fetch("http://localhost:8000/api/login", {
+      const res = await fetch("/login", {
         method: "POST",
         headers: {
           Accept: "application/json",
