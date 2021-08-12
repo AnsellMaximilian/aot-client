@@ -144,8 +144,8 @@ $secondary: #e49631;
       object-position: center;
     }
     .image-container {
-      width: 400px;
-      aspect-ratio: 1/1;
+      width: 300px;
+      height: 300px;
       position: relative;
       max-width: 100%;
       margin: 0 auto;
@@ -153,6 +153,10 @@ $secondary: #e49631;
       overflow: hidden;
       border-radius: 50%;
       border: 1rem solid white;
+      @media screen and (min-width: 700px) {
+        width: 400px;
+        height: 400px;
+      }
     }
     .shifter-image-container {
       display: block;
@@ -160,11 +164,11 @@ $secondary: #e49631;
       position: absolute;
       border: 0.5rem solid $secondary;
       width: 40%;
+      height: 40%;
       overflow: hidden;
       right: 0;
       top: 75%;
       transform: translate(15%, -50%);
-      aspect-ratio: 1/1;
       img {
         &:hover {
           filter: brightness(0.7);
