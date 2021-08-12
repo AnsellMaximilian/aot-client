@@ -5,6 +5,7 @@ import CharacterView from "../views/characters/CharacterView.vue";
 import CharacterCreate from "../views/characters/CharacterCreate.vue";
 import CharacterIndex from "../views/characters/CharacterIndex.vue";
 import CharacterShow from "../views/characters/CharacterShow.vue";
+import CharacterEdit from "../views/characters/CharacterEdit.vue";
 import Login from "../views/auth/Login.vue";
 
 const routes = [
@@ -32,6 +33,11 @@ const routes = [
         path: ":id",
         name: "CharacterShow",
         component: CharacterShow,
+      },
+      {
+        path: ":id/edit",
+        name: "CharacterEdit",
+        component: CharacterEdit,
       },
     ],
   },

@@ -14,9 +14,7 @@ export default {
     Spinner,
   },
   async created() {
-    const res = await fetch(
-      `http://localhost:8000/api/characters/${this.$route.params.id}`
-    );
+    const res = await fetch(`/characters/${this.$route.params.id}`);
     const data = await res.json();
     if (res.ok) {
       console.log(data);

@@ -1,7 +1,9 @@
 <template>
   <div class="form-container">
-    <h1>Create</h1>
-    <form @submit="handleSubmit" enctype="multipart/form-data">
+    <h1>Edit</h1>
+    <Spinner v-if="loadingOldData" :image="true" />
+
+    <form v-else @submit="handleSubmit" enctype="multipart/form-data">
       <div class="form-group">
         <label for="name">Name</label>
         <input
@@ -45,14 +47,29 @@
 </template>
 
 <script>
+import Spinner from "@/components/Spinner.vue";
 export default {
-  name: "CharacterCreate",
+  name: "CharacterEdit",
+  components: {
+    Spinner,
+  },
   data() {
     return {
       name: "",
       gender: "male",
       picture: null,
+      loadingOldData: true,
     };
+  },
+  async created() {
+    const res = await fetch(`/characters/${this.$route.params.id}`);
+    const data = await res.json();
+    if (res.ok) {
+      this.name = data.name;
+      this.gender = data.gender;
+      this.loadingOldData = false;
+      return;
+    }
   },
   methods: {
     handleFileChange(e) {
@@ -64,9 +81,12 @@ export default {
       const createData = new FormData();
       createData.append("name", this.name);
       createData.append("gender", this.gender);
-      createData.append("picture", this.picture);
+      if (this.picture) {
+        createData.append("picture", this.picture);
+      }
+      createData.append("_method", "PUT");
       console.log(createData.get("name"));
-      const res = await fetch("http://localhost:8000/api/characters", {
+      const res = await fetch(`/characters/${this.$route.params.id}`, {
         method: "POST",
         headers: {
           Accept: "application/json",
@@ -77,8 +97,9 @@ export default {
       });
       const data = await res.json();
       if (res.ok) {
+        console.log(data);
         this.$emit("snackbar-set", {
-          message: "Created character",
+          message: "Edited character",
           status: "success",
         });
 

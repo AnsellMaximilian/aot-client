@@ -26,7 +26,11 @@
           </div>
         </div>
         <div class="controls" v-if="!!user && user.isAdmin">
-          <button class="warning">Edit</button>
+          <router-link
+            :to="`/characters/${character.id}/edit`"
+            class="warning button"
+            >Edit</router-link
+          >
           <button class="danger" @click="deleteCharacter(character.id)">
             Delete
           </button>
@@ -158,7 +162,9 @@ $secondary: #e49631;
       padding: 1rem;
       display: flex;
       justify-content: flex-end;
-      button {
+      button,
+      .button {
+        text-decoration: none;
         padding: 0.5rem 1rem;
         color: white;
         font-weight: bold;
